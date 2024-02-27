@@ -31,7 +31,7 @@ export default function Signout({isAuthenticated}) {
     },[isAuthenticated,isloggedIn.loggedIn])
     return (
         <div>
-            <div className="btn btn-danger" onClick={()=>dispatch(logoutUser())}>Sign Out</div>
+            <div className="btn btn-lg btn-danger m-5" onClick={()=>dispatch(logoutUser())}>Sign Out</div>
         </div>
     )
 }

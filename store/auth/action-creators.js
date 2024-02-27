@@ -5,7 +5,7 @@ export const loginUser = (user) => async (dispatch) => {
     setCookie('token',user.token,{
         maxAge:3600,
         sameSite:true,
-        secure:true
+        secure:true,
     })
     dispatch(authenticate(user))
 };

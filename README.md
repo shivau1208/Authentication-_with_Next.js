@@ -6,6 +6,18 @@
 ### Clone the Project with below link:
 [Authentication app with Next.js and JWT](https://github.com/shivau1208/Authentication-_with_Next.js.git)
 
+### With below command create local sqlite DB
+```
+> npx prisma init
+
+> npx prisma generate
+
+> npx prisma db push
+
+> npx prisma studio // to see database in browser.
+
+For different DB change the provider and url 
+```
 ## Preview
 ![Screenshot](https://github.com/shivau1208/Authentication-_with_Next.js/assets/102743170/8d0db04c-cc71-4f41-a650-b03ec5c7f467)
 
@@ -13,6 +25,7 @@
 ```
  npm i
 ```
+
 
 ### To run the development server use below CMDs:
 

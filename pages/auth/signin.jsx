@@ -23,11 +23,15 @@ export default function Signin(req,res) {
   const submit = (e)=>{
     e.preventDefault();
     if(data.email && data.password) {
-      postData('/api/login',(data)).then(dat=>{
+      postData('/api/login',(data))
+      .then(dat=>{
         if(dat.status===200){
+          alert(dat.message)
           dispatch(loginUser(dat.resData))
         }
       }).catch((err)=>console.log(err))
+    }else{
+      alert('Please fill credentials')
     }
   }
   return (
@@ -65,6 +69,10 @@ export default function Signin(req,res) {
                 </form> 
               </div>
             </div>
+          </div>
+          <div>
+            <p>username:user@cl.me</p>
+            <p>password:1234</p>
           </div>
         </div>
       </div>

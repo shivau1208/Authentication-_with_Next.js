@@ -25,7 +25,7 @@ export default async function loginRoute(req,res)  {
             userRole:user.role,
             token:token
         }
-        return res.send({status:200,resData:resData});
+        return res.send({status:200,resData:resData,message:'User logged In'});
     };
     return res.status(401).json("Invalid Request");
 }
