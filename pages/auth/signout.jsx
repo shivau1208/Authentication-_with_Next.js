@@ -26,7 +26,10 @@ export default function Signout({isAuthenticated}) {
     const router = useRouter();
     useEffect(()=>{
         if(!isloggedIn.loggedIn){
-        router.push('/auth/signin')
+          if(typeof window !== 'undefined'){
+            router.push(`${window.location.origin}/auth/signin`)
+
+          }
         }
     },[isAuthenticated,isloggedIn.loggedIn])
     return (

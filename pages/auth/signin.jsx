@@ -17,19 +17,25 @@ export default function Signin(req,res) {
   }));
   useEffect(()=>{
     if(isloggedIn.loggedIn){
-      router.push('/auth/signout');
+      if(typeof window !== 'undefined'){
+        router.push(`${window.location.origin}/auth/signout`);
+
+      }
     }
   },[isloggedIn.loggedIn])
   const submit = (e)=>{
     e.preventDefault();
     if(data.email && data.password) {
-      postData('/api/login',(data))
-      .then(dat=>{
-        if(dat.status===200){
-          alert(dat.message)
-          dispatch(loginUser(dat.resData))
-        }
-      }).catch((err)=>console.log(err))
+      if(typeof window !== 'undefined'){
+        postData(`${window.location.origin}/api/login`,(data))
+        .then(dat=>{
+          if(dat.status===200){
+            alert(dat.message)
+            dispatch(loginUser(dat.resData))
+          }
+        })
+        .catch((err)=>console.log(err))
+      }
     }else{
       alert('Please fill credentials')
     }
