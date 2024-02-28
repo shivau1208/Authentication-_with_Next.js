@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import styles from '../../styles/Home.module.scss'
 import axios from 'axios';
+import { json } from 'react-router-dom';
 
 
 export default function Signin(req,res) {
@@ -24,12 +25,13 @@ export default function Signin(req,res) {
     e.preventDefault();
     if(data.email && data.password) {
         postData(`/api/login`,data)
-        .then(res=>res.json())
+        .then(res=>res.text())
         .then(dat=>{
-          if(dat.status===200){
-            alert(dat.message)
-            dispatch(loginUser(dat.resData))
-          }
+          console.log(JSON.parse(dat))
+          // if(dat.status===200){
+          //   alert(dat.message)
+          //   dispatch(loginUser(dat.resData))
+          // }
         })
         .catch((err)=>console.log(err))
     }else{
