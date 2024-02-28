@@ -17,17 +17,13 @@ export default function Signin(req,res) {
   }));
   useEffect(()=>{
     if(isloggedIn.loggedIn){
-      if(typeof window !== 'undefined'){
-        router.push(`${window.location.origin}/auth/signout`);
-
-      }
+        router.push(`/auth/signout`);
     }
   },[isloggedIn.loggedIn])
   const submit = (e)=>{
     e.preventDefault();
     if(data.email && data.password) {
-      if(typeof window !== 'undefined'){
-        postData(`${window.location.origin}/api/login`,(data))
+        postData(`/api/login`,data)
         .then(dat=>{
           if(dat.status===200){
             alert(dat.message)
@@ -35,7 +31,6 @@ export default function Signin(req,res) {
           }
         })
         .catch((err)=>console.log(err))
-      }
     }else{
       alert('Please fill credentials')
     }

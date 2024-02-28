@@ -7,14 +7,14 @@ import bcrypt from 'bcrypt'
 export default async function loginRoute(req,res)  {
     const {email,password} = parseBody(req.body)
     const prisma1 = new PrismaClient()
-    const user = await prisma1.users.findUnique({
+    const user = await prisma1.users.findFirst({
         where:{
             email
         },
     })
     const compare = await bcrypt.compare(password,user.password)
     if(compare) {
-        user.password= undefined
+        // user.password= undefined
         const token = jwt.sign(
             {
                 user:req.body.email,
