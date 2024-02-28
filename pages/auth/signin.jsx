@@ -24,6 +24,7 @@ export default function Signin(req,res) {
     e.preventDefault();
     if(data.email && data.password) {
         postData(`/api/login`,data)
+        .then(res=>res.json())
         .then(dat=>{
           if(dat.status===200){
             alert(dat.message)
