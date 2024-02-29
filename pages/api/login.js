@@ -7,7 +7,7 @@ import bcrypt from 'bcrypt'
 export default async function loginRoute(req,res)  {
     const {email,password} = parseBody(req.body)
     const prisma1 = new PrismaClient()
-    const user = await prisma1.users.findFirst({
+    const user = await prisma1.users.findUnique({
         where:{
             email
         },

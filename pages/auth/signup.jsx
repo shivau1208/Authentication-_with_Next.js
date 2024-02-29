@@ -13,16 +13,16 @@ export default function Signup() {
     e.preventDefault()
     var confirmpassword = document.getElementById('cnfmpwd').value
     if(data.password===confirmpassword){
-      if(typeof window !== 'undefined'){
-        postData(`${window.location.origin}/api/sign_up`,data).then(dat=>{
-          if(dat.status === 'success') {
-            alert(dat.message)
-            route.push(`${window.location.origin}/auth/signin`)
-          }else{
-            alert(dat.message)
-          }
-        })
-      }
+      postData(`/api/sign_up`,data)
+      .then(res=>res.json())
+      .then(dat=>{
+        if(dat.status === 'success') {
+          alert(dat.message)
+          route.push(`/auth/signin`)
+        }else{
+          alert(dat.message)
+        }
+      })
     }else{
       alert('Passwords does not match!!')
     }
