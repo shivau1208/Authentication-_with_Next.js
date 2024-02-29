@@ -19,7 +19,7 @@
 For different DB change the provider and url 
 ```
 ## Preview
-![Screenshot](https://github.com/shivau1208/Authentication-_with_Next.js/assets/102743170/8d0db04c-cc71-4f41-a650-b03ec5c7f467)
+![Screenshot](https://authentication-application.vercel.app/)
 
 #### Open the project in your code editor and run below CMD, it will install all packages specified in package.json
 ```
