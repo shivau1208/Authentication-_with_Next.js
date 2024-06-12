@@ -20,7 +20,7 @@ For different DB change the provider and url
 ```
 ## Preview
 ```Click this 👇```
-<a href="https://authentication-application.vercel.app/" ><img src="https://github.com/shivau1208/Authentication-_with_Next.js/assets/102743170/8d0db04c-cc71-4f41-a650-b03ec5c7f467" alt="image" /></a>
+<a href="https://authentication-application.vercel.app/signin" ><img src="https://github.com/shivau1208/Authentication-_with_Next.js/assets/102743170/8d0db04c-cc71-4f41-a650-b03ec5c7f467" alt="image" /></a>
 
 
 #### Open the project in your code editor and run below CMD, it will install all packages specified in package.json
