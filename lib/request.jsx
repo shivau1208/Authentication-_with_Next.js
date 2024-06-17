@@ -12,7 +12,7 @@ export async function postData(url, data){
 export const sessionCookie = ()=> {
     return({
         cookieName:"auth",
-        password:"jhsdbcyagscdbWEFByu6T478R2I3UHRKQBKBbjgygvkbk",
+        password:process.env.SESSION_PASSWORD,
         //secure: true should be used in production(HTTPS) but can't be used in developement(HTTP)
         cookieOptions:{
             secure:process.env.NODE_ENV === 'production',
