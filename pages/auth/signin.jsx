@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import styles from '../../styles/Home.module.scss'
 import axios from 'axios';
+import { alert } from '../_app';
 
 
 export default function Signin(req,res) {
@@ -27,13 +28,27 @@ export default function Signin(req,res) {
         .then(res=>res.json())
         .then(dat=>{
           if(dat.status===200){
-            alert(dat.message)
+            document.getElementById('liveAlertPlaceholder').classList.add('active');
+            alert(dat.message,"success")
+            setTimeout(()=>{
+              document.getElementById('liveAlertPlaceholder').classList.remove('active');
+            },3000);
             dispatch(loginUser(dat.resData))
+          }else{
+            document.getElementById('liveAlertPlaceholder').classList.add('active');
+            alert(dat.message,"danger");
+            setTimeout(()=>{
+              document.getElementById('liveAlertPlaceholder').classList.remove('active');
+            },3000);
           }
         })
         .catch((err)=>console.log(err))
     }else{
-      alert('Please fill credentials')
+      document.getElementById('liveAlertPlaceholder').classList.add('active');
+      alert('Please fill credentials','info');
+      setTimeout(()=>{
+        document.getElementById('liveAlertPlaceholder').classList.remove('active');
+      },3000);
     }
   }
   return (

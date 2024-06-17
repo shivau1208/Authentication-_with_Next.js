@@ -2,6 +2,7 @@ import { postData } from '../../lib/request'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import styles from '../../styles/Home.module.scss'
+import { alert } from '../_app'
 
 
 
@@ -18,13 +19,25 @@ export default function Signup() {
       .then(dat=>{
         if(dat.status === 'success') {
           alert(dat.message)
-          route.push(`/auth/signin`)
+          document.getElementById('liveAlertPlaceholder').classList.add('active');
+          route.push(`/auth/signin`);
+          setTimeout(()=>{
+            document.getElementById('liveAlertPlaceholder').classList.remove('active');
+          },3000)
         }else{
-          alert(dat.message)
+          document.getElementById('liveAlertPlaceholder').classList.add('active');
+          alert(dat.message,'danger');
+          setTimeout(()=>{
+            document.getElementById('liveAlertPlaceholder').classList.remove('active');
+          },3000)
         }
       })
     }else{
-      alert('Passwords does not match!!')
+      document.getElementById('liveAlertPlaceholder').classList.add('active');
+      alert('Passwords does not match!!','warning');
+      setTimeout(()=>{
+        document.getElementById('liveAlertPlaceholder').classList.remove('active');
+      },3000)
     }
   }
   return (

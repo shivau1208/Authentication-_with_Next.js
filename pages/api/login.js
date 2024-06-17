@@ -19,7 +19,7 @@ export default async function loginRoute(req,res)  {
             {
                 user:req.body.email,
             },
-            process.env.NEXT_PUBLIC_JWT_KEY,
+            "hsdvcysgdjhcskdcgjhsbcjsgcsgcsbcsdsdcsvegeevevd",
         );
         const resData = {
             userRole:user.role,
@@ -27,7 +27,7 @@ export default async function loginRoute(req,res)  {
         }
         return res.send({status:200,resData:resData,message:'User logged In'});
     };
-    return res.status(401).json("Invalid Request");
+    return res.send({status:401,message:'"Invalid Request"'});
 }
 // export default withIronSessionApiRoute(
 //     async function loginRoute(req,res)  {

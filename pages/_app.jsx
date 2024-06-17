@@ -1,9 +1,23 @@
-import store from '../store/store'
-import '../styles/globals.scss'
-import Head from 'next/head'
-import { Provider } from 'react-redux'
+import store from '../store/store';
+import '../styles/globals.scss';
+import Head from 'next/head';
+import { Provider } from 'react-redux';
+
+export const alert = (message, type) => {
+  const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+  const wrapper = document.createElement('div')
+  wrapper.innerHTML = [
+    `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+    `   <div>${message}</div>`,
+    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+    '</div>'
+  ].join('')
+  console.log(wrapper)
+  alertPlaceholder.innerHTML = wrapper.innerHTML;
+}
 
 export default function App({ Component, pageProps }) {
+
   return (
     <>
       <Head>
@@ -11,8 +25,10 @@ export default function App({ Component, pageProps }) {
       </Head>
       <Provider store={store}>
         <Component {...pageProps} />
-
+        <div className='alert'>
+          <div className='alert-box' id='liveAlertPlaceholder'></div>
+        </div>
       </Provider>
     </>
-  )
+  );
 }
