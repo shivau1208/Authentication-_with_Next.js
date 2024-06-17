@@ -1,9 +1,11 @@
-import React from 'react'
+"use client";
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 export default function index (){
-  return (
-    <div>
-        {typeof window !== 'undefined' ? <a href={`${window.location.origin}/auth/signin`}>Sign In</a> : ''}
-    </div>
-  )
+  const router = useRouter();
+  useEffect(()=>{
+    router.push('/auth/signin')
+  },[router])
+  return null;
 }
