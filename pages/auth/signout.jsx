@@ -10,7 +10,7 @@ export const getServerSideProps = async ({req,res}) => {
     try{
       const isAuthenticated = await jwt.verify(
         cookie,
-        process.env.NEXT_PUBLIC_JWT_KEY,
+        "hsdvcysgdjhcskdcgjhsbcjsgcsgcsbcsdsdcsvegeevevd",
       );
       return {props : {isAuthenticated : isAuthenticated}};
     }catch (err) {
@@ -34,7 +34,7 @@ export default function Signout({isAuthenticated}) {
     },[isAuthenticated,isloggedIn.loggedIn])
     return (
         <div>
-            <div className="btn btn-lg btn-danger m-5" onClick={()=>dispatch(logoutUser())}>Sign Out</div>
+            <div className="btn btn-danger m-5" onClick={()=>dispatch(logoutUser())}>Sign Out</div>
         </div>
     )
 }

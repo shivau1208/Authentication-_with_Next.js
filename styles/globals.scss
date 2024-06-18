@@ -10,13 +10,31 @@ body{
 }
 .alert{
   position: absolute;
-  right: 10%;
+  right: 15%;
   top: 10%;
   width: max-content;
+  --bs-alert-padding-x: 1rem !important;
+  --bs-alert-padding-y: 0.6rem !important;
+  height: 50px;
+  margin: 0;
 }
 .alert-box{
   display: none;
 }
 .active{
   display: block !important;
+}
+.btn-close{
+  width: 0;
+  height: 0;
+}
+@media (width < 768px){
+  .alert{
+    position: absolute;
+    right: 15%;
+    top: 10%;
+    width: max-content;
+    display: flex;
+    justify-content: center;
+  }
 }

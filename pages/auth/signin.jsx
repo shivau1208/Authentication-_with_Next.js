@@ -23,26 +23,33 @@ export default function Signin(req,res) {
   },[isloggedIn.loggedIn])
   const submit = (e)=>{
     e.preventDefault();
+    let loader = document.querySelector('.loader')
     if(data.email && data.password) {
-        postData(`/api/login`,data)
-        .then(res=>res.json())
-        .then(dat=>{
-          if(dat.status===200){
-            document.getElementById('liveAlertPlaceholder').classList.add('active');
-            alert(dat.message,"success")
-            setTimeout(()=>{
-              document.getElementById('liveAlertPlaceholder').classList.remove('active');
-            },3000);
-            dispatch(loginUser(dat.resData))
-          }else{
-            document.getElementById('liveAlertPlaceholder').classList.add('active');
-            alert(dat.message,"danger");
-            setTimeout(()=>{
-              document.getElementById('liveAlertPlaceholder').classList.remove('active');
-            },3000);
-          }
-        })
-        .catch((err)=>console.log(err))
+      if(loader){
+        loader.style.display = 'flex';
+      }
+      postData(`/api/login`,data)
+      .then(res=>res.json())
+      .then(dat=>{
+        if(dat.status===200){
+          document.getElementById('liveAlertPlaceholder').classList.add('active');
+          alert(dat.message,"success")
+          setTimeout(()=>{
+            document.getElementById('liveAlertPlaceholder').classList.remove('active');
+          },3000);
+          dispatch(loginUser(dat.resData))
+        }else{
+          document.getElementById('liveAlertPlaceholder').classList.add('active');
+          alert(dat.message,"danger");
+          setTimeout(()=>{
+            document.getElementById('liveAlertPlaceholder').classList.remove('active');
+          },3000);
+        }
+        if(loader){
+          loader.style.display = 'none';
+        }
+      })
+      .catch((err)=>console.log(err))
     }else{
       document.getElementById('liveAlertPlaceholder').classList.add('active');
       alert('Please fill credentials','info');

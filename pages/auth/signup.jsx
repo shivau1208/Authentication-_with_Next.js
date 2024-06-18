@@ -12,13 +12,17 @@ export default function Signup() {
 
   const register = (e)=>{
     e.preventDefault()
-    var confirmpassword = document.getElementById('cnfmpwd').value
+    var confirmpassword = document.getElementById('cnfmpwd').value;
+    let loader = document.querySelector('.loader')
     if(data.password===confirmpassword){
+      if(loader){
+        loader.style.display = 'flex';
+      }
       postData(`/api/sign_up`,data)
       .then(res=>res.json())
       .then(dat=>{
         if(dat.status === 'success') {
-          alert(dat.message)
+          alert(dat.message,'success')
           document.getElementById('liveAlertPlaceholder').classList.add('active');
           route.push(`/auth/signin`);
           setTimeout(()=>{
@@ -30,6 +34,9 @@ export default function Signup() {
           setTimeout(()=>{
             document.getElementById('liveAlertPlaceholder').classList.remove('active');
           },3000)
+        };
+        if(loader){
+          loader.style.display = 'none';
         }
       })
     }else{

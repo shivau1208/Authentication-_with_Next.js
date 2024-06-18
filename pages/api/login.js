@@ -19,7 +19,7 @@ export default async function loginRoute(req,res)  {
             {
                 user:req.body.email,
             },
-            process.env.NEXT_PUBLIC_JWT_KEY,
+            "hsdvcysgdjhcskdcgjhsbcjsgcsgcsbcsdsdcsvegeevevd",
         );
         const resData = {
             userRole:user.role,
