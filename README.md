@@ -19,7 +19,7 @@
 For different DB change the provider and url 
 ```
 ## Preview
-```Click this 👇 ```
+```Click this 👇```
 <a href="https://authentication-application.vercel.app/auth/signin" ><img src="https://github.com/shivau1208/Authentication-_with_Next.js/assets/102743170/8d0db04c-cc71-4f41-a650-b03ec5c7f467" alt="image" /></a>
 
 
