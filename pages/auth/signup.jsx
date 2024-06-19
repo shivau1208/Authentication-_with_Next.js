@@ -19,7 +19,6 @@ export default function Signup() {
         loader.style.display = 'flex';
       }
       postData(`/api/sign_up`,data)
-      .then(res=>res.json())
       .then(dat=>{
         if(dat.status === 'success') {
           alert(dat.message,'success')
