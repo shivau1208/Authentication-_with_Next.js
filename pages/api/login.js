@@ -12,22 +12,24 @@ export default async function loginRoute(req,res)  {
             email
         },
     })
-    const compare = await bcrypt.compare(password,user.password)
-    if(compare) {
-        // user.password= undefined
-        const token = jwt.sign(
-            {
-                user:req.body.email,
-            },
-            process.env.JWT_KEY,
-        );
-        const resData = {
-            userRole:user.role,
-            token:token
-        }
-        return res.send({status:200,resData:resData,message:'User logged In'});
-    };
-    return res.send({status:401,message:'"Invalid Request"'});
+    if(user){
+        const compare = bcrypt.compare(password,user?.password)
+        if(compare) {
+            // user.password= undefined
+            const token = jwt.sign(
+                {
+                    user:req.body.email,
+                },
+                process.env.JWT_KEY,
+            );
+            const resData = {
+                userRole:user.role,
+                token:token
+            }
+            return res.send({status:200,resData:resData,message:'User logged In'});
+        };
+    }
+    return res.send({status:401,message:'User does not exist'});
 }
 // export default withIronSessionApiRoute(
 //     async function loginRoute(req,res)  {

@@ -9,7 +9,7 @@ export default async function SignupRoute(req,res) {
     const prisma1 = new PrismaClient()
     var rows = await prisma1.users.count()
     if(rows < 2){
-        await prisma1.users.create({
+        let response = await prisma1.users.create({
             data: {
                 'email':email,
                 'fname':fname,
@@ -17,10 +17,15 @@ export default async function SignupRoute(req,res) {
                 'password':passw
             }
         })
+        if(response){
+            return res.send({
+                status:'success',
+                message:'User created successfully'
+            })
+        }
         return res.send({
-            status:'success',
-            message:'User created successfully'
-        });
+            message:'User already exist,Please add different Email Id'
+        })
     }else{
         return res.send({
             message:'Reached max limit to create'

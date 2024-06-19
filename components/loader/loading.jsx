@@ -4,7 +4,7 @@ export default function Loading() {
   return (
     <div className={`${styles.flexbox} loader`}>
       <div>
-        <div class={`${styles.circleLoader}`}>
+        <div className={`${styles.circleLoader}`}>
           <div></div>
           <div></div>
           <div></div>
