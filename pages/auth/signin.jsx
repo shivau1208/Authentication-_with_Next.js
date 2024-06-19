@@ -29,7 +29,6 @@ export default function Signin(req,res) {
         loader.style.display = 'flex';
       }
       postData(`/api/login`,data)
-      .then(res=>res.json())
       .then(dat=>{
         if(dat.status===200){
           document.getElementById('liveAlertPlaceholder').classList.add('active');
