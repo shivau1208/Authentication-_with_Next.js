@@ -11,7 +11,7 @@ export const loginUser = (user) => async (dispatch) => {
 };
 
 export const logoutUser = (user) => async (dispatch) => {
-    deleteCookie('token');
+    deleteCookie('cid');
     dispatch(deAuthenticate(user));
 };
 
