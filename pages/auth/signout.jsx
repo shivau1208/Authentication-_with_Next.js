@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCookie } from 'cookies-next';
 
 export const getServerSideProps = async ({req,res}) => {
-    const cookie = getCookie("token",{req,res});
+    const cookie = getCookie("cid",{req,res});
     if(!cookie) return {props : {isAuthenticated :false}};
     try{
       const isAuthenticated = await jwt.verify(
