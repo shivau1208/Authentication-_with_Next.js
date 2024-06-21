@@ -2,7 +2,7 @@ import { authenticate, deAuthenticate, restoreAuthSate } from "./auth-slice"
 import {setCookie,deleteCookie} from 'cookies-next'
 
 export const loginUser = (user) => async (dispatch) => {
-    setCookie('token',user.token,{
+    setCookie('cid',user.token,{
         maxAge:3600,
         sameSite:true,
         secure:true,
