@@ -6,6 +6,7 @@ export const loginUser = (user) => async (dispatch) => {
         maxAge:3600,
         sameSite:true,
         secure:true,
+        httpOnly:true
     })
     dispatch(authenticate(user))
 };
