@@ -4,7 +4,7 @@ export async function postData(url='', data=''){
       credentials:'same-origin',
       body:JSON.stringify(data)
   });
-  return response.json();
+  return response;
 }
 
 export const sessionCookie = ()=> {

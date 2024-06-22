@@ -2,6 +2,7 @@ import { parseBody } from "../../lib/parseBody"
 import { PrismaClient } from "@prisma/client"
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt'
+import { serialize } from "cookie";
 
 
 export default async function loginRoute(req,res)  {
@@ -13,23 +14,27 @@ export default async function loginRoute(req,res)  {
         },
     })
     if(user){
-        const compare = bcrypt.compare(password,user?.password)
+        const compare = await bcrypt.compare(password,user?.password)
+        console.log(compare)
         if(compare) {
             // user.password= undefined
-            const token = jwt.sign(
-                {
-                    user:req.body.email,
-                },
-                process.env.JWT_KEY,
-            );
+            const token = jwt.sign({user:req?.body?.email},process.env.JWT_KEY,{expiresIn:'1h'});
             const resData = {
                 userRole:user.role,
                 token:token
             }
-            return res.send({status:200,resData:resData,message:'User logged In'});
+            res.setHeader('Set-Cookie',serialize('cid',token,{
+                httpOnly:true,
+                secure:process.env.NODE_ENV === 'production',
+                maxAge:'3600',
+                path:'/',
+                sameSite:'strict'
+            }))
+            return res.status(200).json({message:'User logged In successfully!'});
         };
+        return res.status(403).json({message:'Invalid credentials'});
     }
-    return res.send({status:401,message:'User does not exist'});
+    return res.status(401).json({message:'User does not exist'});
 }
 // export default withIronSessionApiRoute(
 //     async function loginRoute(req,res)  {

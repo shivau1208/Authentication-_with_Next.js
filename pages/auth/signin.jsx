@@ -16,39 +16,40 @@ export default function Signin(req,res) {
     'loggedIn': state.auth?.isLoggedIn,
     'role':state.auth?.user
   }));
-  useEffect(()=>{
-    if(isloggedIn.loggedIn){
-        router.push(`/auth/signout`);
-    }
-  },[isloggedIn.loggedIn])
-  const submit = (e)=>{
+  // useEffect(()=>{
+  //   if(isloggedIn.loggedIn){
+  //       router.push(`/auth/signout`);
+  //   }
+  // },[isloggedIn.loggedIn])
+  const submit = async (e)=>{
     e.preventDefault();
     let loader = document.querySelector('.loader')
     if(data.email && data.password) {
       if(loader){
         loader.style.display = 'flex';
       }
-      postData(`/api/login`,data)
-      .then(dat=>{
-        if(dat.status===200){
-          document.getElementById('liveAlertPlaceholder').classList.add('active');
-          alert(dat.message,"success")
-          setTimeout(()=>{
-            document.getElementById('liveAlertPlaceholder').classList.remove('active');
-          },3000);
-          dispatch(loginUser(dat.resData))
-        }else{
-          document.getElementById('liveAlertPlaceholder').classList.add('active');
-          alert(dat.message,"danger");
-          setTimeout(()=>{
-            document.getElementById('liveAlertPlaceholder').classList.remove('active');
-          },3000);
-        }
-        if(loader){
-          loader.style.display = 'none';
-        }
-      })
-      .catch((err)=>console.log(err))
+      const res = await postData(`/api/login`,data)
+      let {message} = await res.json();
+
+      console.log(message);
+      if(res.status == 200){
+        router.push(`/auth/signout`)
+        document.getElementById('liveAlertPlaceholder').classList.add('active');
+        alert(message,"success")
+        setTimeout(()=>{
+          document.getElementById('liveAlertPlaceholder').classList.remove('active');
+        },3000);
+      }else{
+        document.getElementById('liveAlertPlaceholder').classList.add('active');
+        alert(message,"danger");
+        setTimeout(()=>{
+          document.getElementById('liveAlertPlaceholder').classList.remove('active');
+        },3000);
+        router.push(`/auth/signin`)
+      }
+      if(loader){
+        loader.style.display = 'none';
+      }
     }else{
       document.getElementById('liveAlertPlaceholder').classList.add('active');
       alert('Please fill credentials','info');
